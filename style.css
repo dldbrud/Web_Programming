@@ -2,7 +2,7 @@
 
 * { box-sizing: border-box; }
 
-html { scroll-behavior: auto; zoom: 0.5; }
+html { scroll-behavior: auto; zoom: 0.52; }
 body {
   margin: 0;
   background: #e9e6e0;
@@ -32,7 +32,7 @@ body {
   margin: 0;
   padding: 5px 24px;
   border: 2px solid #222;
-  background: #fff9a8;
+  background: #f4efa2;
   font-family: 'Space Mono', monospace;
   font-size: 30px;
 }
@@ -2968,8 +2968,8 @@ button:active {
 /* 컴퓨터/일러스트 전용 크기 제한(분리 규칙) */
 .character-illustration, .intro-illustration {
   /* further enlarge the illustration itself */
-  max-width: 760px !important;
-  max-height: 760px !important;
+  max-width: 800px !important;
+  max-height: 800x !important;
   width: auto !important;
   height: auto !important;
 }
@@ -3439,10 +3439,12 @@ hr.dotted {
 
 .project-modal-window {
   width: min(1200px, 96%) !important;
-  height: 130vh !important;
-  max-width: 120% !important;
-  max-height: 150vh !important;
-  min-height: 30vh !important;
+  height: 150vh !important;
+  max-width: 130% !important;
+  max-height: 170vh !important;
+  min-height: 90vh !important;
+  min-width: 50% !important;
+
   transform: none !important;
   transform-origin: center center;
 }
