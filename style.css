@@ -2,10 +2,10 @@
 
 * { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; zoom: 0.5; }
+html { scroll-behavior: auto; zoom: 0.5; }
 body {
   margin: 0;
-  background: #fff;
+  background: #e9e6e0;
   color: #222;
   font-family: 'Noto Sans KR', sans-serif;
 }
@@ -96,9 +96,30 @@ body {
   font-size: 24px;
 }
 
-.menu-bar a { color: #111; text-decoration: none; font-weight: 700; }
-.menu-bar a:hover { color: #3D4FD3; }
-.menu-active { font-weight: 900; text-decoration: underline; text-underline-offset: 4px; }
+.menu-bar a {
+  color: #111;
+  text-decoration: none;
+  font-weight: 700;
+  padding: 8px 12px;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  transition: background 150ms ease, color 150ms ease;
+}
+
+.menu-bar a:hover {
+  background: #e8e8ff;
+  color: #2f2f8f;
+}
+
+.menu-bar a.menu-active,
+.menu-bar a.active {
+  background: #514fc4;
+  color: #ffffff;
+  font-weight: 900;
+  text-decoration: none;
+  box-shadow: inset 2px 2px 0 #2f2f8f, inset -2px -2px 0 #8f8cff;
+  border-color: #2f2f8f;
+}
 
 .horizontal-scroll {
   height: calc(100% - 52px - 64px - 48px);
@@ -106,7 +127,7 @@ body {
   overflow-x: auto;
   overflow-y: hidden;
   scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
   background: #fff;
 }
 .horizontal-scroll::-webkit-scrollbar { display: none; }
@@ -137,13 +158,6 @@ body {
 .center {
   display: flex;
   flex-direction: column;
-/* 전체 페이지를 약 1.5배 축소(시각적으로)합니다. 원본 레이아웃을 최대한 보존하기 위해
-   transform으로 축소하고, 축소로 인해 생기는 여백을 보정하기 위해 컨테이너 폭을 늘립니다. */
-.page-wrap {
-  /* removed transform-based scaling; page uses html { zoom:0.5 } for consistent 100% view */
-  transform: none;
-  width: auto;
-}
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -619,12 +633,16 @@ button:active {
 }
 
 .project-image {
+  width: 100%;
+  height: 280px;
   min-height: 170px;
   display: grid;
   place-items: center;
   position: relative;
-  border-bottom: 3px solid #222;
-  background: #f2f4ff;
+  border: 2px solid #666;
+  margin: 12px;
+  background: #fff;
+  overflow: hidden;
   color: #1f39d8;
   font-family: 'Space Mono', monospace;
   font-size: 16px;
@@ -634,16 +652,19 @@ button:active {
 .project-image::before {
   content: '';
   position: absolute;
-  inset: 16px;
-  border: 3px solid #222;
-  background: rgba(255,255,255,.72);
+  inset: 0;
+  border: none;
+  background: transparent;
+  color: #777;
+  font-family: 'Space Mono', monospace;
+  font-size: 18px;
+  font-weight: 800;
 }
-.project-image span {
-  position: relative;
-  z-index: 1;
-  padding: 8px 12px;
-  border: 2px solid #222;
-  background: #fff;
+.project-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
 }
 .project-shot-lan {
   background:
@@ -724,7 +745,7 @@ button:active {
 }
 .project-modal-titlebar h2 {
   margin: 0;
-  font-size: 24px;
+  font-size: 28px;
   line-height: 1;
 }
 .project-modal-close {
@@ -743,7 +764,7 @@ button:active {
 .project-modal-content {
   min-height: 0;
   overflow-y: auto;
-  padding: 48px 64px 64px;
+  padding: 40px 48px 56px;
   background: #fff;
   font-family: 'Noto Sans KR', sans-serif;
 }
@@ -830,11 +851,6 @@ button:active {
   border-color: #3D4FD3;
   box-shadow: inset 2px 2px 0 rgba(255,255,255,0.2), inset -2px -2px 0 rgba(0,0,0,0.2);
 }
-.project-card {
-  cursor: pointer;
-}
-
-
 .project-window-bar {
   min-height: 38px;
   padding: 0 8px 0 12px;
@@ -862,26 +878,6 @@ button:active {
   background: #e8e8e8;
   box-shadow: inset 2px 2px 0 #fff, inset -2px -2px 0 #777;
 }
-.project-image {
-  min-height: 0;
-  height: auto;
-  border: 2px inset #8c8c8c;
-  border-left-width: 3px;
-  border-right-width: 3px;
-  margin: 12px;
-  background: #f5f5f5;
-}
-.project-image::before {
-  inset: 0;
-  display: grid;
-  place-items: center;
-  border: none;
-  background: transparent;
-  color: #777;
-  font-family: 'Space Mono', monospace;
-  font-size: 18px;
-  font-weight: 800;
-}
 .project-shot-lan,
 .project-shot-finance,
 .project-shot-medical,
@@ -907,34 +903,22 @@ button:active {
   background: #555;
   box-shadow: 5px 0 #555, 10px 0 #555, 5px 5px #555, 10px 5px #555, 10px 10px #555;
 }
-.project-image{
-    width:100%;
-    height:280px;
-    overflow:hidden;
-    border:2px solid #666;
-    background:#fff;
-}
-
-.project-image img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    display:block;
-}
+/* Consolidated .project-image defined earlier to avoid duplicates */
 
 
 /* ===================================================
    MY STORY
    Windows 95   =================================================== */
 .story-layout {
-  height: 100%;
-  min-height: 0;
+  height: auto;
+  min-height: auto;
   display: grid;
-  grid-template-columns: minmax(220px, 260px) 1fr;
-  gap: 20px;
-  padding: 22px 26px;
-  overflow: hidden;
+  grid-template-columns: minmax(320px, 380px) 1fr;
+  gap: 24px;
+  padding: 16px 34px 20px;
+  overflow: visible;
   background: #fff;
+  align-items: start;
 }
 
 .story-sidebar {
@@ -942,26 +926,28 @@ button:active {
   position: sticky;
   top: 0;
   display: grid;
-  gap: 9px;
-  padding: 14px;
+  gap: 12px;
+  padding: 22px 18px;
   z-index: 2;
   border: 3px solid #222;
   background: #d7d7d7;
   box-shadow: 5px 5px 0 #bcbcbc;
+  width: 100%;
+  min-width: 340px;
 }
 
 .story-sidebar h2 {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin: 0 0 8px;
-  padding: 9px 16px;
+  margin: 0 0 10px;
+  padding: 12px 18px;
   border: 2px solid #111;
   background: #e8e8e8;
   box-shadow: inset 2px 2px 0 #fff, inset -2px -2px 0 #777, 3px 3px 0 #8b8b8b;
   color: #111;
   font-family: 'Space Mono', monospace;
-  font-size: 18px;
+  font-size: 24px;
   font-weight: 800;
   line-height: 1;
 }
@@ -970,62 +956,81 @@ button:active {
   content: 'i';
   display: grid;
   place-items: center;
-  width: 26px;
-  height: 26px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   background: #3D4FD3;
   color: #fff;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 700;
   flex-shrink: 0;
 }
 
 .story-tab {
   display: block;
-  padding: 10px 11px;
+  width: 100%;
+  margin: 0;
+  padding: 10px 16px;
   border: 3px solid #222;
   background: #f2f2f2;
   box-shadow: 3px 3px 0 #bcbcbc;
   color: #111;
   font-family: 'Space Mono', 'Noto Sans KR', monospace;
-  font-size: 15px;
+  font-size: 22px;
   font-weight: 800;
-  line-height: 1.3;
+  line-height: 1.2;
+  text-align: left;
   text-decoration: none;
+  white-space: nowrap;
   word-break: keep-all;
+  box-sizing: border-box;
+  min-height: 48px;
+  cursor: pointer;
+  pointer-events: auto;
 }
-.story-tab:hover,
+.story-tab:hover {
+  border-color: #3D4FD3;
+  background: #e8edff;
+  color: #3D4FD3;
+}
 .story-tab.is-active {
   border-color: #3D4FD3;
-  background: #fff;
-  color: #3D4FD3;
+  background: #3D4FD3;
+  color: #fff;
+}
+
+.story-menu-item {
+  cursor: pointer;
+  pointer-events: auto;
 }
 
 .story-article {
-  width: 100%;
+  width: min(1500px, 92%);
   max-width: 100%;
-  height: 100%;
-  min-height: 0;
-  overflow-y: auto;
+  height: auto;
+  min-height: auto;
+  overflow: visible;
   justify-self: center;
   border: 2px solid #111;
   background: #fff;
   box-shadow: inset 2px 2px 0 #fff, inset -2px -2px 0 #777, 6px 6px 0 #8a8a8a;
   padding: 0 28px 52px;
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
 }
 .story-article::-webkit-scrollbar { width: 14px; }
 .story-article::-webkit-scrollbar-track { background: #e0e0e0; border-left: 2px solid #777; }
 .story-article::-webkit-scrollbar-thumb { background: #9a9a9a; border: 2px solid #333; }
 
 .story-header {
-  margin: 0 -34px 32px;
+  margin: 0 0 32px;
   padding: 0;
 }
 .story-kicker {
-  width: 100%;
+  width: calc(100% + 60px);
   height: 44px;
   margin-bottom: 0;
+  margin-left: -30px;
+  margin-right: -30px;
   padding: 0 14px;
   display: flex;
   align-items: center;
@@ -1050,11 +1055,11 @@ button:active {
   flex-shrink: 0;
 }
 .story-header p {
-  margin: 0 34px;
+  margin: 0 0 32px;
   color: #111;
-  font-size: clamp(20px, 2.1vw, 30px);
-  font-weight: 800;
-  line-height: 1.45;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.9;
   word-break: keep-all;
 }
 .future-plans-title {
@@ -1119,8 +1124,8 @@ button:active {
 }
 
 .story-section {
-  padding: 0 0 52px;
-  margin: 0 0 52px;
+  padding: 0 0 32px;
+  margin: 0 0 80px;
   border-bottom: none;
   scroll-margin-top: 18px;
 }
@@ -1140,27 +1145,28 @@ button:active {
 .story-section h1,
 .story-section h2 {
   width: fit-content;
-  margin: 0 0 22px;
+  margin: 0 0 32px;
   padding: 0;
   border: none;
   background: #fff;
   box-shadow: none;
   color: #3D4FD3;
   font-family: 'Space Mono', 'Noto Sans KR', monospace;
-  font-size: clamp(24px, 2.4vw, 34px);
-  line-height: 1.25;
+  font-size: clamp(36px, 3vw, 44px);
+  font-weight: 700;
+  line-height: 1.2;
 }
 .story-section p {
-  margin: 0 0 24px;
+  margin: 0 0 32px;
   color: #111;
-  font-size: 22px;
+  font-size: 28px;
   line-height: 1.9;
   word-break: keep-all;
 }
 .story-em {
   color: #3D4FD3;
-  font-size: 1.05em;
-  font-weight: 800;
+  font-size: 28px;
+  font-weight: 700;
   text-decoration: underline;
   text-underline-offset: 4px;
 }
@@ -1235,7 +1241,7 @@ button:active {
   overflow-x: hidden;
   overflow-y: auto;
   scroll-snap-type: y mandatory;
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
   background: #fff;
 }
 .issue-scroll::-webkit-scrollbar { width: 14px; }
@@ -1963,9 +1969,9 @@ button:active {
    INTEREST REACT WINDOWS HELP PAGE
    =================================================== */
 .react-interest-layout {
-  height: 100%;
-  min-height: 0;
-  overflow-y: auto;
+  height: auto;
+  min-height: auto;
+  overflow: visible;
   padding: 28px 34px 42px;
   display: flex;
   flex-direction: column;
@@ -2008,11 +2014,11 @@ button:active {
 
 .react-doc-window {
   width: min(1500px, 92%);
-  flex: 1 1 0;
+  flex: 0 0 auto;
   height: auto;
-  min-height: 0;
+  min-height: auto;
   display: grid;
-  grid-template-rows: 44px minmax(0, 1fr);
+  grid-template-rows: 44px auto;
   border: 2px solid #111;
   background: #C0C0C0;
   box-shadow: inset 2px 2px 0 #fff, inset -2px -2px 0 #777, 6px 6px 0 #8a8a8a;
@@ -2032,36 +2038,41 @@ button:active {
 
 .react-doc-body {
   min-height: 0;
-  overflow-y: auto;
+  overflow: visible;
+  height: auto;
+  max-height: none;
   padding: 36px 60px 48px;
   background: #fff;
   color: #111;
   font-family: 'Noto Sans KR', sans-serif;
-  font-size: 22px;
+  font-size: 28px;
   line-height: 1.9;
   text-align: left;
 }
 
 .react-doc-body h1 {
-  margin: 0 0 10px;
+  margin: 0 0 32px;
   font-family: 'Space Mono', 'Noto Sans KR', monospace;
-  font-size: clamp(60px, 6vw, 80px);
-  line-height: 1;
+  font-size: clamp(48px, 5vw, 64px);
+  font-weight: 800;
+  line-height: 1.05;
 }
 
 .react-subtitle {
   margin: 0 0 30px;
   color: #3D4FD3;
-  font-size: 23px;
-  font-weight: 800;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.4;
 }
 
 .react-doc-body h2 {
   margin: 0 0 20px;
   color: #111;
   font-family: 'Space Mono', 'Noto Sans KR', monospace;
-  font-size: 26px;
-  line-height: 1.35;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.4;
 }
 
 .react-doc-body p {
@@ -2088,34 +2099,52 @@ button:active {
 .react-flow-box,
 .react-code-block {
   margin: 26px 0 10px;
+  padding: 18px 24px;
   border: 2px solid #111;
   background: #e8e8e8;
   box-shadow: inset 2px 2px 0 #fff, inset -2px -2px 0 #777;
   font-family: 'Space Mono', 'Noto Sans KR', monospace;
+  font-size: 23px;
+  line-height: 1.8;
+  min-height: 0;
+  height: auto;
+  max-height: none;
+  overflow: visible;
+  box-sizing: border-box;
 }
 
 .react-flow-box {
-  width: min(360px, 100%);
-  padding: 18px 22px;
-  text-align: center;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: fit-content;
+  max-width: min(1040px, 100%);
+  padding: 22px 28px;
 }
 
-.react-flow-box p {
+.react-flow-box p,
+.react-flow-box span,
+.react-arrow-list li,
+.react-code-block {
+  font-size: 23px;
+  line-height: 1.8;
   margin: 0;
-  font-size: 20px;
-  font-weight: 800;
 }
 
 .react-flow-box span {
   display: block;
   margin: 6px 0;
-  color: #1f39d8;
-  font-size: 22px;
-  font-weight: 800;
+  font-size: 28px;
+  line-height: 1;
 }
 
 .react-code-block {
-  padding: 20px 24px;
+  display: inline-block;
+  width: fit-content;
+  max-width: min(1040px, 100%);
+  padding: 18px 24px;
   overflow-x: auto;
   color: #111;
   font-size: 19px;
@@ -2320,63 +2349,64 @@ button:active {
 }
 
 .issue-doc-window {
-  width: min(100%, 1100px);
-  min-height: 620px;
-  max-height: calc(100vh - 220px);
+  width: min(1500px, 92%);
+  flex: 1 1 0;
+  min-height: 0;
   margin: 0 auto;
   display: grid;
-  grid-template-rows: 44px 1fr;
+  grid-template-rows: 44px minmax(0, 1fr);
   border: 2px solid #111;
   background: #C0C0C0;
   box-shadow: inset 2px 2px 0 #fff, inset -2px -2px 0 #777, 6px 6px 0 #8a8a8a;
 }
 
 .issue-doc-titlebar {
-  font-size: 20px;
+  font-size: 22px;
 }
 
 .issue-doc-body {
   min-height: 0;
-  overflow-y: auto;
-  width: min(100%, 96%);
-  max-width: 980px;
-  margin: 0 auto;
-  padding: 38px 28px 52px;
+  overflow: visible;
+  padding: 36px 60px 48px;
   background: #fff;
+  color: #111;
   font-family: 'Noto Sans KR', sans-serif;
-  font-size: clamp(18px, 1.3vw, 22px);
-  line-height: 1.8;
+  font-size: 28px;
+  line-height: 1.9;
   text-align: left;
 }
 
 .issue-doc-body h1 {
-  margin: 0 0 16px;
+  margin: 0 0 32px;
   color: #111;
-  font-size: 56px;
+  font-family: 'Space Mono', 'Noto Sans KR', monospace;
+  font-size: clamp(48px, 5vw, 64px);
   font-weight: 800;
-  line-height: 1.2;
+  line-height: 1.05;
 }
 
 .issue-subtitle {
-  margin: 0 0 40px;
+  margin: 0 0 36px;
   color: #3D4FD3;
-  font-size: 24px;
-  font-weight: 800;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.4;
 }
 
 .issue-doc-body p {
-  margin: 0 0 26px;
+  margin: 0 0 32px;
   word-break: keep-all;
 }
 
 .issue-doc-body ul {
-  margin: 0 0 26px;
+  margin: 0 0 32px;
   padding-left: 30px;
 }
 
 .issue-doc-body li {
-  margin: 0 0 18px;
-  line-height: 1.8;
+  margin: 0 0 24px;
+  line-height: 1.9;
+  font-size: 28px;
 }
 
 .issue-em {
@@ -2388,11 +2418,8 @@ button:active {
 
 .issue-separator {
   margin: 44px 0;
-  color: #111;
-  font-family: 'Space Mono', monospace;
-  font-size: 18px;
-  font-weight: 800;
-  white-space: nowrap;
+  border-top: 2px dotted #aaa;
+  font-size: 0;
   overflow: hidden;
 }
 
@@ -2400,7 +2427,8 @@ button:active {
    COMPANY PAGE
    =================================================== */
 .company-layout {
-  height: 100%;
+  min-height: auto;
+  height: auto;
   display: grid;
   place-items: center;
   padding: 34px;
@@ -2444,14 +2472,14 @@ button:active {
 .company-content h2 {
   margin: 28px 0 12px;
   color: #111;
-  font-size: clamp(34px, 4vw, 58px);
+  font-size: clamp(36px, 4vw, 64px);
   line-height: 1.15;
 }
 
 .company-content > p {
-  margin: 0 0 28px;
-  font-size: 21px;
-  line-height: 1.7;
+  margin: 0 0 32px;
+  font-size: 28px;
+  line-height: 1.9;
   word-break: keep-all;
 }
 
@@ -2463,6 +2491,9 @@ button:active {
 
 .company-grid section {
   padding: 20px;
+  min-height: auto;
+  height: auto;
+  max-height: none;
   border: 3px solid #222;
   background: #fff;
   box-shadow: 4px 4px 0 #d0d0d0;
@@ -2471,8 +2502,9 @@ button:active {
 .company-grid h3 {
   margin: 0 0 12px;
   color: #3D4FD3;
-  font-size: 22px;
-  line-height: 1.25;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.35;
 }
 
 .company-grid p {
@@ -2484,9 +2516,9 @@ button:active {
 
 /* NAVER COMPANY PAGE */
 .naver-company-layout {
-  height: 100%;
-  min-height: 0;
-  overflow-y: hidden;
+  min-height: auto;
+  height: auto;
+  overflow: visible;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -2562,10 +2594,11 @@ button:active {
 
 .naver-info-window {
   width: min(1500px, 92%);
-  flex: 1 1 0;
-  min-height: 0;
+  flex: 0 0 auto;
+  height: auto;
+  min-height: auto;
   display: grid;
-  grid-template-rows: 44px minmax(0, 1fr);
+  grid-template-rows: 44px auto;
   border: 2px solid #111;
   background: #C0C0C0;
   box-shadow: inset 2px 2px 0 #fff, inset -2px -2px 0 #777, 6px 6px 0 #8a8a8a;
@@ -2584,8 +2617,10 @@ button:active {
 }
 
 .naver-info-content {
-  min-height: 0;
-  overflow-y: auto;
+  min-height: auto;
+  overflow: visible;
+  height: auto;
+  max-height: none;
   padding: 36px 60px 48px;
   background: #fff;
   color: #111;
@@ -2594,25 +2629,25 @@ button:active {
 }
 
 .naver-info-content h1 {
-  margin: 0 0 14px;
+  margin: 0 0 16px;
   color: #111;
   font-family: 'Space Mono', 'Noto Sans KR', monospace;
-  font-size: clamp(60px, 6vw, 80px);
-  font-weight: 900;
-  line-height: 1;
+  font-size: clamp(48px, 5vw, 56px);
+  font-weight: 800;
+  line-height: 1.05;
 }
 
 .naver-subtitle {
   margin: 0 0 36px;
   color: #4CAF50;
-  font-size: clamp(22px, 2.2vw, 28px);
-  font-weight: 800;
-  line-height: 1.5;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.4;
 }
 
 .naver-info-content p {
-  margin: 0 0 36px;
-  font-size: 22px;
+  margin: 0 0 32px;
+  font-size: 28px;
   line-height: 1.9;
   word-break: keep-all;
 }
@@ -2775,7 +2810,7 @@ button:active {
 .h-line1 {
   margin: 0;
   font-family: 'Space Mono', monospace;
-  font-size: clamp(36px, 5vw, 72px);
+  font-size: clamp(54px, 7.5vw, 108px);
   font-weight: 700;
   color: #111;
   letter-spacing: -2px;
@@ -2784,7 +2819,7 @@ button:active {
 .h-line2 {
   margin: 0;
   font-family: 'Space Mono', monospace;
-  font-size: clamp(34px, 6vw, 80px);
+  font-size: clamp(51px, 9vw, 120px);
   font-weight: 800;
   color: #3D4FD3;
   letter-spacing: -2px;
@@ -3138,7 +3173,7 @@ hr.dotted {
   .info-panel .row { grid-template-columns: 1fr; gap: 6px; padding: 12px 0; }
   .info-panel dl { padding: 20px; }
   .profile-titlebar { font-size: 18px; }
-  .hero h2 { font-size: 58px; }
+  .hero h2 { font-size: 87px; }
   .laptop-lid { width: 160px; height: 106px; }
   .laptop-chin { width: 170px; }
   .laptop-base { width: 184px; }
@@ -3149,7 +3184,7 @@ hr.dotted {
   .project-modal-overlay { padding: 2px; }
   .project-modal-window {
     width: calc(100vw - 4px);
-    height: calc(100vh - 4px);
+    height: calc(100vh - 66px);
     min-width: 0;
   }
   .project-modal-content { padding: 34px; }
@@ -3159,17 +3194,18 @@ hr.dotted {
   .company-grid { grid-template-columns: 1fr; }
   .naver-company-layout { padding: 18px 14px 34px; gap: 16px; }
   .naver-logo-frame { width: min(240px, 82%); padding: 14px 20px; }
-  .naver-info-content { max-height: 58vh; padding: 24px 18px 34px; }
-  .naver-info-content p { font-size: 16px; line-height: 1.75; }
-  .naver-subtitle { font-size: 18px; }
-  .react-interest-layout { padding: 18px 14px 34px; }
-  .react-doc-window { height: 72vh; }
-  .react-doc-body { padding: 26px 18px 38px; font-size: 16px; }
-  .react-doc-body h2 { font-size: 20px; }
-  .react-subtitle { font-size: 18px; }
+  .naver-info-content { max-height: none; padding: 24px 18px 34px; overflow: visible; }
+  .naver-info-content p { font-size: 24px; line-height: 1.9; }
+  .naver-subtitle { font-size: 28px; }
+  .react-interest-layout { padding: 18px 14px 34px; height: auto; overflow: visible; }
+  .react-doc-window { height: auto; }
+  .react-doc-body { padding: 26px 18px 38px; font-size: 24px; }
+  .react-doc-body h1 { font-size: 48px; }
+  .react-doc-body h2 { font-size: 28px; }
+  .react-subtitle { font-size: 28px; }
   .react-flow-box p,
   .react-arrow-list li,
-  .react-code-block { font-size: 15px; }
+  .react-code-block { font-size: 22px; }
   .home-layout { grid-template-columns: 1fr; align-items: start; padding: 20px 16px; }
   .home-right { height: auto; }
   .quote-card { width: 100%; align-self: auto; }
@@ -3178,8 +3214,8 @@ hr.dotted {
   .issue-link-row { flex-wrap: wrap; justify-content: center; }
   .issue-link-card { width: min(340px, 90vw); min-width: 0; max-width: 100%; }
   .issue-doc-window { min-height: 600px; max-height: none; width: 96%; }
-  .issue-doc-body { max-width: 94%; padding: 28px 16px 44px; font-size: 18px; }
-  .issue-doc-body h1 { font-size: 36px; }
+  .issue-doc-body { max-width: 94%; padding: 28px 16px 44px; font-size: 24px; }
+  .issue-doc-body h1 { font-size: 48px; }
   .issue-header-subtitle { font-size: 18px; }
   .issue-news-article { font-size: 16px; line-height: 1.75; }
   .news-hero, .news-top, .scrap-row, .scrap-row.reverse {
@@ -3202,11 +3238,38 @@ hr.dotted {
     height: 22px;
     justify-self: center;
   }
+}
+
+/* Make section titles match INTRO label typography */
+.story-sidebar h2,
+.issue-title-box,
+.react-interest-label,
+.company-label,
+.naver-company-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+/* Ensure mobile also matches */
+@media (max-width: 760px) {
+  .story-sidebar h2,
+  .issue-title-box,
+  .react-interest-label,
+  .company-label,
+  .naver-company-label {
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: 0;
+  }
+}
   .mon-body { width: 160px; height: 120px; }
   .mon-chin { width: 160px; }
   .crt-tower { width: 44px; height: 142px; }
   .crt-kb { width: 160px; }
-}
 
 
 
@@ -3241,7 +3304,7 @@ hr.dotted {
 
 .modal-tech-grid {
   display: flex;
-  gap: 24px;
+  gap: 16px;
   padding: 8px 0 4px;
   flex-wrap: wrap;
 }
@@ -3254,7 +3317,7 @@ hr.dotted {
 .modal-tech-col h3 {
   color: #3D4FD3;
   font-family: 'Space Mono', monospace;
-  font-size: 22px;
+  font-size: 28px;
   font-weight: 800;
   margin: 0 0 10px;
   padding-bottom: 5px;
@@ -3265,16 +3328,16 @@ hr.dotted {
   margin: 0;
   padding-left: 16px;
   font-family: 'Space Mono', monospace;
-  font-size: 19px;
-  line-height: 2.2;
+  font-size: 23px;
+  line-height: 1.9;
   color: #222;
 }
 
 .modal-body-text p {
   font-family: 'Noto Sans KR', sans-serif;
-  font-size: 22px;
-  line-height: 2.2;
-  margin: 0 0 20px;
+  font-size: 28px;
+  line-height: 1.9;
+  margin: 0 0 32px;
   color: #222;
   word-break: keep-all;
 }
@@ -3351,7 +3414,7 @@ hr.dotted {
 .project-modal-content {
   min-height: 0;
   overflow-y: auto;
-  padding: 58px 76px 76px !important;
+  padding: 40px 40px 40px !important;
 }
 
 .project-modal-titlebar {
@@ -3375,12 +3438,11 @@ hr.dotted {
 }
 
 .project-modal-window {
-  width: 135vw !important;
-  height: 128vh !important;
-  max-width: none !important;
-  max-height: none !important;
-  transform: scale(1.08);
+  width: min(1200px, 96%) !important;
+  height: 130vh !important;
+  max-width: 120% !important;
+  max-height: 150vh !important;
+  min-height: 30vh !important;
+  transform: none !important;
   transform-origin: center center;
 }
-
-
